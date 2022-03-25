@@ -1,7 +1,11 @@
 import {Categories, PizzaCard, SortPopup} from "../components";
 
 const categories = ['Мясные','Вегетарианская','Гриль','Острые','Закрытые'];
-const sort = ['популярности','цене','алфавиту']
+const sort = [
+  {name: 'популярности', type: 'popular'},
+  {name: 'цене', type: 'price'},
+  {name: 'алфавиту', type: 'alphabet'},
+]
 
 function Home({items}){
     return(
