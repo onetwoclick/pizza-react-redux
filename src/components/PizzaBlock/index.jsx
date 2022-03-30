@@ -1,7 +1,7 @@
 import {useState} from "react";
 import PropTypes from "prop-types";
 
-function PizzaCard({name,price,imageUrl,types,sizes}){
+function Index({name,price,imageUrl,types,sizes}){
   const typeNames=['тонкое','традиционное'];
   const sizeNames=[26,30,40];
   const [activeType,setActiveType] = useState(types[0]);
@@ -74,7 +74,7 @@ function PizzaCard({name,price,imageUrl,types,sizes}){
   );
 }
 
-PizzaCard.propTypes = {
+Index.propTypes = {
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -82,11 +82,11 @@ PizzaCard.propTypes = {
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
-PizzaCard.degaulProps = {
+Index.degaulProps = {
   name: '---',
   price: 0,
   types: [],
   sizes: [],
 }
 
-export default PizzaCard;
+export default Index;

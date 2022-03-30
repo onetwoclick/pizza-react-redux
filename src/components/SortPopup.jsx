@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import Categories from "./Categories";
 
-function SortPopup({items}){
+function SortPopup({items, onClickSortBy, activeSortBy}){
     const [visiblePopup, setVisiblePopup] = React.useState(false);
-    const [selectItem, setSelectItem] = React.useState(0);
     const sortRef = React.useRef();
-    const activeItem = items[selectItem].name;
+    const activeItem = items.find((obj) => obj.type === activeSortBy).name;
 
     const toggleVisible = () => {
         setVisiblePopup(!visiblePopup)
@@ -20,7 +21,7 @@ function SortPopup({items}){
     },[]);
 
     const onSelectItem = (index) => {
-        setSelectItem(index);
+        onClickSortBy(index);
         setVisiblePopup(false);
     }
 
@@ -48,9 +49,9 @@ function SortPopup({items}){
                     {items &&
                     items.map((obj, index) => (
                         <li
-                            className={selectItem === index ? 'active':''}
+                            className={activeSortBy === obj.type ? 'active':''}
                             key={index}
-                            onClick={() => onSelectItem(index)}
+                            onClick={() => onSelectItem(obj.type)}
                         >
                             {obj.name}
                         </li>
@@ -61,6 +62,16 @@ function SortPopup({items}){
             )}
         </div>
     )
+}
+
+SortPopup.propTypes = {
+    items: PropTypes.array.isRequired,
+    activeSortBy: PropTypes.string.isRequired,
+    onClickSortBy: PropTypes.func.isRequired
+}
+
+SortPopup.degaulProps = {
+    items: [],
 }
 
 export default SortPopup;

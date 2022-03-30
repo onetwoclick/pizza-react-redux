@@ -1,21 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
+import Index from "./PizzaBlock";
 
-function Categories({items, onClickItem}){
-    const [selectItem, setSelectItem] = React.useState();
-    const onSelectItem = (index) => {
-        setSelectItem(index);
-    }
+function Categories({items, onClickCategory, activeCategory}){
 
     return(
         <div className="categories">
             <ul>
-                <li className={selectItem === null ? 'active':''} onClick={() => onSelectItem(null)}>Все</li>
+                <li className={activeCategory === null ? 'active':''} onClick={() => onClickCategory(null)}>Все</li>
                 {items &&
                     items.map((name, index) => (
                         <li
-                            className={selectItem === index ? 'active':''}
+                            className={activeCategory === index ? 'active':''}
                             key={index}
-                            onClick={() => onSelectItem(index)}
+                            onClick={() => onClickCategory(index)}
                         >
                             {name}
                         </li>
@@ -24,6 +22,17 @@ function Categories({items, onClickItem}){
             </ul>
         </div>
     )
+}
+
+Categories.propTypes = {
+  items: PropTypes.array.isRequired,
+  activeCategory: PropTypes.oneOf([PropTypes.number, null]),
+  onClickCategory: PropTypes.func.isRequired
+}
+
+Categories.degaulProps = {
+  items: [],
+  activeCategory: null
 }
 
 export default Categories;
