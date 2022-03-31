@@ -17,8 +17,8 @@ const cart = (state = initialState, action) => {
                 action.payload
               ]
         };
-      const sumCount = [].concat.apply([], Object.keys(newItems));
-      const sumTotal = sumCount.reduce((sum, obj) => obj.price + sum, 0)
+      const sumCount = [].concat.apply([], Object.values(newItems));
+      const sumTotal = sumCount.reduce((sum, obj) => obj.price + sum, 0);
       return {
         ...state,
         items: newItems,

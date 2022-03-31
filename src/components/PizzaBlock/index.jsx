@@ -84,7 +84,7 @@ function Index({id,name,price,imageUrl,types,sizes,addedCount}){
             />
           </svg>
           <span>Добавить</span>
-          <i>{addedCount}</i>
+          {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>
     </div>
@@ -97,7 +97,7 @@ Index.propTypes = {
   price: PropTypes.number.isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
-  addedCount: PropTypes.number.isRequired,
+  addedCount: PropTypes.number,
 }
 
 Index.degaulProps = {

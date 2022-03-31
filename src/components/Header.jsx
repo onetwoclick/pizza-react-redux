@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 function Header() {
-    const {totalPrice, totalCount} = useSelector(({cart}) => (cart))
+    const {totalPrice, totalCount} = useSelector(({cart}) => cart)
 
     return (
         <div className="header">
