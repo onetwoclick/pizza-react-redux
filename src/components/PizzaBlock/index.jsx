@@ -1,11 +1,16 @@
 import {useState} from "react";
 import PropTypes from "prop-types";
+import {Button} from "../index";
+import {useDispatch} from "react-redux";
+import {addPizzaToCart} from "../../redux/actions/cart";
 
-function Index({name,price,imageUrl,types,sizes}){
+function Index({id,name,price,imageUrl,types,sizes,addedCount}){
+  const dispatch = useDispatch();
+
   const typeNames=['тонкое','традиционное'];
   const sizeNames=[26,30,40];
   const [activeType,setActiveType] = useState(types[0]);
-  const [activeSize,setActiveSize] = useState(sizes[0]);
+  const [activeSize,setActiveSize] = useState(0);
 
   const onSelectType = (index) => {
     setActiveType(index);
@@ -13,6 +18,18 @@ function Index({name,price,imageUrl,types,sizes}){
 
   const onSelectSize = (index) => {
     setActiveSize(index);
+  }
+
+  const AddPizza = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      size: sizeNames[activeSize],
+      type: typeNames[activeType],
+    }
+    dispatch(addPizzaToCart(obj));
   }
 
   return(
@@ -53,7 +70,7 @@ function Index({name,price,imageUrl,types,sizes}){
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <Button onClick={AddPizza} className="button button--outline button--add" outline>
           <svg
             width="12"
             height="12"
@@ -67,8 +84,8 @@ function Index({name,price,imageUrl,types,sizes}){
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          <i>{addedCount}</i>
+        </Button>
       </div>
     </div>
   );
@@ -80,6 +97,7 @@ Index.propTypes = {
   price: PropTypes.number.isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  addedCount: PropTypes.number.isRequired,
 }
 
 Index.degaulProps = {

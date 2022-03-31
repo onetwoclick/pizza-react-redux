@@ -12,6 +12,7 @@ function SortPopup({items, onClickSortBy, activeSortBy}){
     }
 
     const handleOutsideClick = (e) => {
+        //возможно не работает в firefox/edge
         if(!e.path.includes(sortRef.current)){
             setVisiblePopup(false);
         }

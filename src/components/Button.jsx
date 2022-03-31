@@ -1,10 +1,10 @@
 import React from "react";
 
-function Button({url, className, children}){
+function Button({onClick, className, children}){
     console.log();
     return(
         <button
-            href={url}
+            onClick={onClick}
             className={className}
         >
             {children}

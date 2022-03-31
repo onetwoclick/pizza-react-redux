@@ -14,6 +14,7 @@ const sort = [
 
 function Home() {
   const items = useSelector(({pizzas}) => pizzas.items);
+  const cartItems = useSelector(({cart}) => cart.items);
   const isLoaded = useSelector(({pizzas}) => pizzas.isLoaded);
   const {category, sortBy} = useSelector(({filters}) => filters);
 
@@ -51,6 +52,7 @@ function Home() {
           <PizzaBlock
             key={obj.id}
             {...obj}
+            addedCount={cartItems[obj.id] && cartItems[obj.id].length}
           />
         ))
           : Array(12)
