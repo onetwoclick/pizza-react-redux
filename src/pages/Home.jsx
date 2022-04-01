@@ -52,7 +52,7 @@ function Home() {
           <PizzaBlock
             key={obj.id}
             {...obj}
-            addedCount={cartItems[obj.id] && cartItems[obj.id].length}
+            addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
           />
         ))
           : Array(12)
