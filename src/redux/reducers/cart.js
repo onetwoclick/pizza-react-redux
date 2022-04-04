@@ -39,17 +39,40 @@ const cart = (state = initialState, action) => {
         ...state,
         totalCount: action.payload,
       })
-    case 'REMOVE_CART':
+    case 'PLUS_CART':{
+      const oldItems = state.items[action.payload];
+      const newItems = state.items[action.payload].items].s
+
+      return ({
+        ...state,
+        items: {
+          ...state.items,
+          [action.payload]: {
+            items: newItems,
+            totalPrice: newItems.reduce((sum, obj) => obj.price + sum, 0),
+          }
+        },
+      })
+    }
+    case 'MINUS_CART':
+      return ({
+        ...state,
+        totalCount: action.payload,
+      })
+    case 'REMOVE_CART':{
       const newItems={
         ...state.items
       }
-      delete newItems[action.payload]
+      const currentTotalPrice = newItems[action.payload].totalPrice;
+      const currentTotalCount = newItems[action.payload].items.length;
+      delete newItems[action.payload];
       return ({
         ...state,
         items: newItems,
-        totalPrice: 0,
-        totalCount: 0
+        totalCount: state.totalCount - currentTotalCount,
+        totalPrice: state.totalPrice - currentTotalPrice,
       })
+    }
     case 'CLEAR_CART':
       return ({
         items: {},
